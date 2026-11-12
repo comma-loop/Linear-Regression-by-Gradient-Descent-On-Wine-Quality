@@ -1,0 +1,158 @@
+====================================================================== 
+4.1 DU LIEU, CHIA DU LIEU 
+======================================================================
+X: (1599, 11), y: (1599,), thieu gia tri: 0
+Chia: hoan vi default_rng(42), 320 phan tu dau = kiem tra. Huan luyen 1279, kiem tra 320
+Moc so sanh (trung binh nhan): MSE kiem tra = 0.6040
+Chuan hoa: lmax=3.0839 lmin=0.0597 kappa=51.63; L*=0.2112205; ||theta*||=5.675
+
+====================================================================== 
+4.2 KIEM THU THEO THU TU TANG DAN 
+======================================================================
+(0) Vi du giai tay 4 diem: theta* giai tay = [0.7 2.2], chuan tac numpy = [0.7 2.2], GD = [0.7 2.2]; |GD - giai tay|_inf = 1.6e-15; lambda=(0.2974, 4.2026)
+(1) Kiem tra gradient (theta~N(0,I), seed=0, eps=1e-05): sai khac max = 3.21e-10
+(2) Tong hop (seed=42, N=500, D=11, X~N(0,1), theta_true~N(0,1), sigma=0.05):
+    |GD - chuan tac|_inf = 8.9e-16;  |chuan tac - theta_true|_inf = 0.0037  (sigma/sqrt(N) = 0.0022)
+(3) Du lieu that: xem cac muc sau. rank(X) = 12 = D+1 = 12; lmin = 0.0597 > 0 (Menh de 1)
+
+====================================================================== 
+4.3 DIEU KIEN SO 
+======================================================================
+Tho      : lmax=3.630e+03 lmin=2.818e-07 kappa=1.288e+10 gmax=5.510e-04
+Chuan hoa: lmax=3.0839 lmin=0.0597 kappa=51.63 gmax=0.6485;  kappa giam 2.49e+08 lan
+Chuan hoa: 507 vong den ||theta-theta*||<1e-6
+Tho (T=5000): L-L*=0.030, ||theta_T-theta*||=57.4, MSE kiem tra=0.5001 (toi uu 0.4018)
+Can kappa*ln(||e0||/eps) cho du lieu tho ~ 2.30e+11 vong
+
+====================================================================== 
+4.4 KHAO SAT BUOC HOC 
+======================================================================
+c=0.1   gamma=0.0324 gamma/gmax=0.050  L(theta_300)=0.211270  vong=5114
+c=0.5   gamma=0.1621 gamma/gmax=0.250  L(theta_300)=0.211221  vong=1019
+c=1.0   gamma=0.3243 gamma/gmax=0.500  L(theta_300)=0.211220  vong=507
+c=1.9   gamma=0.6161 gamma/gmax=0.950  L(theta_300)=0.211220  vong=265
+c=1.99  gamma=0.6453 gamma/gmax=0.995  L(theta_300)=0.211233  vong=1090
+c=2.05  gamma=0.6647 gamma/gmax=1.025  L(theta_300)=phan_ky  vong=—
+gamma_opt=0.6362 (=0.981 gmax), rho_opt=0.9620; can 401 vong, do 285 vong
+gamma=1/lmax: can kappa*ln ~ 803 vong (||e0||=5.67), do 507 vong
+
+Tieu chi dung ||g||<eps (Thuat toan 1) so voi ||theta-theta*|| (cac bang):
+  eps=1e-03: ||g||=9.81e-04, ||theta-theta*||=8.65e-03 <= ||g||/lmin=1.64e-02  [True]
+  eps=1e-05: ||g||=9.81e-06, ||theta-theta*||=1.64e-04 <= ||g||/lmin=1.64e-04  [True]
+  eps=1e-07: ||g||=9.90e-08, ||theta-theta*||=1.66e-06 <= ||g||/lmin=1.66e-06  [True]
+
+====================================================================== 
+4.5 QUAN TINH 
+======================================================================
+GD (b=0, g=1/lmax): gamma=0.3243 beta=0.000 vong=>400 (507)
+Momentum (b=0.5, g=1/lmax): gamma=0.3243 beta=0.500 vong=242
+Momentum (b=0.9, g=1/lmax): gamma=0.3243 beta=0.900 vong=263
+Heavy-ball toi uu (Polyak): gamma=0.9995 beta=0.571 vong=57
+Heavy-ball toi uu: gamma=0.9995, beta=0.5710, sqrt(beta)=0.7557; uoc luong tiem can 55.5 vong, do 57 vong
+Dieu kien on dinh heavy-ball: gamma=0.9995 < 2(1+beta)/lmax = 1.0189 [True]  (trong khi 2/lmax = 0.6485; dinh ly 1 chi ap dung cho beta=0)
+Mo-dun nghiem dac trung theo tung tri rieng (12 gia tri): min=0.755665, max=0.755665; sqrt(beta)=0.755665
+Biet thuc tai lmin: 0.00e+00, tai lmax: -4.00e-15 (≈0 -> nghiem kep -> them thua so (1+t); vi vay do 57 > uoc luong 56, day la uoc luong tiem can chu khong phai can tren cung)
+beta=0.5, gamma=1/lmax: mo-dun lon nhat = 0.9596 (tri rieng nho nhat), so phuc ung voi 10/12 tri rieng
+beta=0.9, gamma=1/lmax: mo-dun lon nhat = 0.9487 (tri rieng nho nhat), so phuc ung voi 12/12 tri rieng
+
+====================================================================== 
+4.6 SO SANH VOI THU VIEN CHUAN 
+======================================================================
+['chuan_tac', np.float64(0.4224409354545362), np.float64(0.4017662665115397), np.float64(0.3208276402677397), 0.0]
+['gd_2000', np.float64(0.4224409354545362), np.float64(0.4017662665115399), np.float64(0.32082764026773947), 3.6637359812630166e-15]
+['heavy_ball_2000', '', '', '', 3.982925100842749e-15]
+['sklearn', '', np.float64(0.4017662665115401), np.float64(0.320827640267739), 4.1772141301521515e-15]
+|GD - sklearn|_inf = 8.9e-16
+
+====================================================================== 
+5. THAO LUAN — BANG CHUNG CHO CAC NHAN DINH 
+======================================================================
+R2 kiem tra=0.3208; RMSE=0.634; do lech chuan nhan=0.807; ty le nhan 5/6 = 0.825
+He so (dac trung chuan hoa):
+   alcohol               +0.289
+   volatile acidity      -0.198
+   sulphates             +0.148
+   fixed acidity         +0.115
+   total sulfur dioxide  -0.102
+   density               -0.073
+   chlorides             -0.068
+   citric acid           -0.062
+   free sulfur dioxide   +0.045
+   residual sugar        +0.028
+   pH                    -0.019
+
+Cac cap dac trung tuong quan manh nhat (|r|):
+   fixed acidity ~ pH: r=-0.679
+   free sulfur dioxide ~ total sulfur dioxide: r=+0.679
+   fixed acidity ~ citric acid: r=+0.663
+   fixed acidity ~ density: r=+0.652
+   volatile acidity ~ citric acid: r=-0.578
+   citric acid ~ pH: r=-0.534
+   Ti trong: r(alcohol)=-0.497, r(fixed acidity)=+0.652
+VIF: fixed acidity=7.69, density=6.37, pH=3.28, citric acid=3.17 (...)
+
+Dac trung bac 2 (77 dac trung, nghiem chuan tac): MSE huan luyen=0.3699, MSE kiem tra=0.3924, R2 kiem tra=0.3366  (tuyen tinh: 0.4018, 0.3208)
+
+Trung binh du doan theo nhan that (tap kiem tra):
+   quality=3 (n=  2): TB du doan = 4.649
+   quality=4 (n= 12): TB du doan = 5.684
+   quality=5 (n=149): TB du doan = 5.334
+   quality=6 (n=126): TB du doan = 5.819
+   quality=7 (n= 28): TB du doan = 6.265
+   quality=8 (n=  3): TB du doan = 6.443
+Phan du: TB=-0.079, do lech chuan=0.629
+Lam tron du doan: dung chinh xac 0.631; sai lech <=1 diem 0.966; (moc: luon doan 5 -> dung 0.466; luon doan 6 -> dung 0.394)
+
+====================================================================== 
+DOI CHIEU VOI BAO CAO 
+======================================================================
+  [OK  ] MSE moc                    bao cao=0.604      tinh duoc=0.603974
+  [OK  ] lmax chuan hoa             bao cao=3.084      tinh duoc=3.0839
+  [OK  ] lmin chuan hoa             bao cao=0.0597     tinh duoc=0.0597295
+  [OK  ] kappa chuan hoa            bao cao=51.6       tinh duoc=51.6311
+  [OK  ] lmax tho                   bao cao=3630.0     tinh duoc=3629.94
+  [OK  ] lmin tho                   bao cao=2.82e-07   tinh duoc=2.81796e-07
+  [OK  ] kappa tho                  bao cao=12900000000.0 tinh duoc=1.28814e+10
+  [OK  ] gamma_max                  bao cao=0.6485     tinh duoc=0.64853
+  [OK  ] L(theta*)                  bao cao=0.2112205  tinh duoc=0.21122
+  [OK  ] ||theta*||                 bao cao=5.67       tinh duoc=5.67468
+  [OK  ] vong gamma=1/lmax          bao cao=507        tinh duoc=507
+  [OK  ] Tho: L-L*                  bao cao=0.03       tinh duoc=0.0301263
+  [OK  ] Tho: ||theta_T-theta*||    bao cao=57.4       tinh duoc=57.3604
+  [OK  ] Tho: MSE kiem tra          bao cao=0.5001     tinh duoc=0.500073
+  [OK  ] MSE kiem tra toi uu        bao cao=0.4018     tinh duoc=0.401766
+  [OK  ] B4 L300 c=0.1              bao cao=0.21127    tinh duoc=0.21127
+  [OK  ] B4 L300 c=0.5              bao cao=0.211221   tinh duoc=0.211221
+  [OK  ] B4 L300 c=1.99             bao cao=0.211233   tinh duoc=0.211233
+  [OK  ] B4 vong c=0.1              bao cao=5114       tinh duoc=5114
+  [OK  ] B4 vong c=0.5              bao cao=1019       tinh duoc=1019
+  [OK  ] B4 vong c=1                bao cao=507        tinh duoc=507
+  [OK  ] B4 vong c=1.9              bao cao=265        tinh duoc=265
+  [OK  ] B4 vong c=1.99             bao cao=1090       tinh duoc=1090
+  [OK  ] gamma_opt                  bao cao=0.6362     tinh duoc=0.636208
+  [OK  ] rho_opt                    bao cao=0.962      tinh duoc=0.962
+  [OK  ] gamma_opt can              bao cao=401        tinh duoc=401.421
+  [OK  ] gamma_opt do               bao cao=285        tinh duoc=285
+  [OK  ] can kappa*ln               bao cao=803        tinh duoc=802.942
+  [OK  ] HB gamma                   bao cao=0.9995     tinh duoc=0.999501
+  [OK  ] HB beta                    bao cao=0.571      tinh duoc=0.571029
+  [OK  ] HB sqrt(beta)              bao cao=0.756      tinh duoc=0.755665
+  [OK  ] B5 vong b=0.5              bao cao=242        tinh duoc=242
+  [OK  ] B5 vong b=0.9              bao cao=263        tinh duoc=263
+  [OK  ] B5 vong HB                 bao cao=57         tinh duoc=57
+  [OK  ] HB uoc luong               bao cao=56         tinh duoc=55.51
+  [OK  ] B6 MSE train               bao cao=0.4224     tinh duoc=0.422441
+  [OK  ] B6 R2 test                 bao cao=0.3208     tinh duoc=0.320828
+  [OK  ] RMSE                       bao cao=0.634      tinh duoc=0.63385
+  [OK  ] std nhan                   bao cao=0.81       tinh duoc=0.807317
+  [OK  ] he so con                  bao cao=0.289      tinh duoc=0.288916
+  [OK  ] he so axit bay hoi         bao cao=-0.198     tinh duoc=-0.197708
+  [OK  ] he so sunfat               bao cao=0.148      tinh duoc=0.148201
+  [OK  ] he so axit co dinh         bao cao=0.115      tinh duoc=0.115312
+  [OK  ] he so SO2 tong             bao cao=-0.102     tinh duoc=-0.101995
+
+Tong: 44/44 muc khop.
+Sai so may: GD=3.7e-15 HB=4.0e-15 sklearn=4.2e-15 GD-sklearn=8.9e-16
+
+Cac so KHONG co trong bao cao goc (do bao cao khong neu cach sinh) - cap nhat bao cao theo:
+   kiem tra gradient = 3.2e-10 (bao cao: 3.6e-10); tong hop GD-NE = 8.9e-16 (bao cao: 6.7e-16); tong hop NE-theta_true = 0.0037 (bao cao: 0.0078)

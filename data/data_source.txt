@@ -1,0 +1,7 @@
+Wine Quality (red wine only: winequality-red.csv)
+P. Cortez, A. Cerdeira, F. Almeida, T. Matos, J. Reis. Wine Quality [Dataset]. UCI Machine Learning Repository, 2009.
+DOI: https://doi.org/10.24432/C56S3T
+Trang dataset: https://archive.ics.uci.edu/dataset/186/wine+quality
+Giay phep: CC BY 4.0. 1599 mau, 11 dac trung hoa ly + nhan quality (3..8), khong thieu gia tri. Phan tach bang dau ';'.
+Tham khao: P. Cortez et al., "Modeling wine preferences by data mining from physicochemical properties",
+Decision Support Systems 47(4):547-553, 2009. DOI 10.1016/j.dss.2009.05.016.
