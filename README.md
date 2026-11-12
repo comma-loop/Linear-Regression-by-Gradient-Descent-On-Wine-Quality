@@ -50,6 +50,3 @@ python run_experiments.py    # generate all tables and figures into src/output/
 
 ## Results
 All tables, figures and numbers are in `Report.pdf` and in `src/output/` (`results.txt`, `tables/`, `figures/`).
-
-## Acknowledgments
-Cortez, P., Cerdeira, A., Almeida, F., Matos, T. and Reis, J. (2009). Wine Quality. UCI Machine Learning Repository. https://doi.org/10.24432/C56S3T
