@@ -47,7 +47,6 @@ cd src
 python test_core.py          # run the tests
 python run_experiments.py    # generate all tables and figures into src/output/
 ```
-To follow the work step by step, open `CP_Group1_GD_LinReg.ipynb` in Jupyter and choose Run All.
 
 ## Results
 All tables, figures and numbers are in `Report.pdf` and in `src/output/` (`results.txt`, `tables/`, `figures/`).
